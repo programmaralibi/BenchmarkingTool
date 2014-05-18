@@ -1,92 +1,6 @@
 ******************************************
 -----------------START-----------------
 Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
-....
-Completed 4000 transactions
-	Stock level .............   155 ( 3.9%)
-	Order status by name ....   108 ( 2.7%)
-	Order status by ID ......    65 ( 1.6%)
-	Payment by name .........  1050 (26.2%)
-	Payment by ID ...........   661 (16.5%)
-	Delivery schedule .......   167 ( 4.2%)
-	New order ...............  1774 (44.4%)
-	New order rollback ......    20 ( 0.5%)
-Resetting database to initial state
-
- Time taken for executing : 32803command :---
-[java, -jar, dacapo.jar, h2]Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
-....
-Completed 4000 transactions
-	Stock level .............   155 ( 3.9%)
-	Order status by name ....   108 ( 2.7%)
-	Order status by ID ......    65 ( 1.6%)
-	Payment by name .........  1050 (26.2%)
-	Payment by ID ...........   661 (16.5%)
-	Delivery schedule .......   167 ( 4.2%)
-	New order ...............  1774 (44.4%)
-	New order rollback ......    20 ( 0.5%)
-Resetting database to initial state
-
- Time taken for executing : 35710command :---
-[java, -jar, dacapo.jar, h2]
------------------END----------------- 
-
-
-
-******************************************
------------------START-----------------
-Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
-
- Time taken for executing : 21221command :---
-[java, -Xms5M, -Xmx5M, -jar, dacapo.jar, h2]Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
-
- Time taken for executing : 21635command :---
-[java, -Xms5M, -Xmx5M, -jar, dacapo.jar, h2]
------------------END----------------- 
-
-
-
-******************************************
------------------START-----------------
-Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
-
- Time taken for executing : 7267command :---
-[java, -Xms15M, -Xmx15M, -jar, dacapo.jar, h2]Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
-
- Time taken for executing : 7082command :---
-[java, -Xms15M, -Xmx15M, -jar, dacapo.jar, h2]
------------------END----------------- 
-
-
-
-******************************************
------------------START-----------------
-Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
-java.lang.reflect.InvocationTargetException
-java.lang.reflect.InvocationTargetException
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.dacapo.harness.H2.preIteration(H2.java:77)
-	at org.dacapo.harness.Benchmark.run(Benchmark.java:152)
-	at org.dacapo.harness.TestHarness.runBenchmark(TestHarness.java:218)
-	at org.dacapo.harness.TestHarness.main(TestHarness.java:171)
-	at Harness.main(Harness.java:17)
-Caused by: java.lang.OutOfMemoryError: GC overhead limit exceeded
-	at org.h2.value.ValueString.get(ValueString.java:87)
-	at org.h2.jdbc.JdbcPreparedStatement.setString(JdbcPreparedStatement.java:313)
-	at org.apache.derbyTesting.system.oe.load.SimpleInsert.orderTable(SimpleInsert.java:429)
-	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateForOneWarehouse(SimpleInsert.java:149)
-	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateAllTables(SimpleInsert.java:127)
-	at org.apache.derbyTesting.system.oe.load.ThreadInsert.populateAllTables(ThreadInsert.java:127)
-	at org.dacapo.h2.TPCC.loadData(TPCC.java:400)
-	at org.dacapo.h2.TPCC.preIterationMemoryDB(TPCC.java:215)
-	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)
-	... 9 more
-
- Time taken for executing : 6411command :---
-[java, -Xms15M, -Xmx15M, -jar, dacapo.jar, h2]Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
 java.lang.reflect.InvocationTargetException
 java.lang.reflect.InvocationTargetException
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -99,33 +13,189 @@ java.lang.reflect.InvocationTargetException
 	at org.dacapo.harness.TestHarness.main(TestHarness.java:171)
 	at Harness.main(Harness.java:17)
 Caused by: org.h2.jdbc.JdbcSQLException: Out of memory.; SQL statement:
-INSERT INTO ORDERLINE (OL_O_ID, OL_D_ID, OL_W_ID, OL_NUMBER, OL_I_ID, OL_SUPPLY_W_ID, OL_DELIVERY_D, OL_QUANTITY, OL_AMOUNT, OL_DIST_INFO, OL_DELIVERY_D_INITIAL, OL_INITIAL)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, TRUE) [90108-123]
+
+ALTER TABLE STOCK ADD CONSTRAINT
+    S_I_FK FOREIGN KEY (S_I_ID) REFERENCES ITEM [90108-123]
 	at org.h2.message.Message.getSQLException(Message.java:111)
 	at org.h2.message.Message.convertThrowable(Message.java:303)
 	at org.h2.command.Command.executeUpdate(Command.java:231)
-	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:139)
-	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:128)
-	at org.apache.derbyTesting.system.oe.load.SimpleInsert.orderTable(SimpleInsert.java:437)
-	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateForOneWarehouse(SimpleInsert.java:149)
-	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateAllTables(SimpleInsert.java:127)
-	at org.apache.derbyTesting.system.oe.load.ThreadInsert.populateAllTables(ThreadInsert.java:127)
-	at org.dacapo.h2.TPCC.loadData(TPCC.java:400)
-	at org.dacapo.h2.TPCC.preIterationMemoryDB(TPCC.java:215)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:162)
+	at org.h2.tools.RunScript.process(RunScript.java:166)
+	at org.h2.tools.RunScript.execute(RunScript.java:154)
+	at org.dacapo.h2.TPCC.runScript(TPCC.java:566)
+	at org.dacapo.h2.TPCC.runScript(TPCC.java:556)
+	at org.dacapo.h2.TPCC.runScript(TPCC.java:544)
+	at org.dacapo.h2.TPCC.createConstraints(TPCC.java:382)
+	at org.dacapo.h2.TPCC.preIterationMemoryDB(TPCC.java:225)
 	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)
 	... 9 more
 Caused by: java.lang.OutOfMemoryError: GC overhead limit exceeded
-	at java.math.BigDecimal.movePointLeft(BigDecimal.java:2472)
-	at org.h2.value.ValueTimestamp.convertScale(ValueTimestamp.java:150)
-	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:311)
-	at org.h2.table.Table.validateConvertUpdateSequence(Table.java:599)
-	at org.h2.command.dml.Insert.insertRows(Insert.java:116)
-	at org.h2.command.dml.Insert.update(Insert.java:82)
+	at org.h2.index.TreeIndex.find(TreeIndex.java:293)
+	at org.h2.index.MultiVersionIndex.removeIfExists(MultiVersionIndex.java:132)
+	at org.h2.index.MultiVersionIndex.add(MultiVersionIndex.java:51)
+	at org.h2.table.TableData.addRowsToIndex(TableData.java:337)
+	at org.h2.table.TableData.addIndex(TableData.java:245)
+	at org.h2.command.ddl.AlterTableAddConstraint.createIndex(AlterTableAddConstraint.java:275)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:203)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:89)
 	at org.h2.command.CommandContainer.update(CommandContainer.java:72)
 	at org.h2.command.Command.executeUpdate(Command.java:209)
 	... 18 more
 
- Time taken for executing : 6464command :---
-[java, -Xms15M, -Xmx15M, -jar, dacapo.jar, h2]
+ Time taken for executing : 170012 command :---
+ java -Xms200M -Xmx200M -jar dacapo.jar h2Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
+java.lang.reflect.InvocationTargetException
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.dacapo.harness.H2.preIteration(H2.java:77)
+	at org.dacapo.harness.Benchmark.run(Benchmark.java:152)
+	at org.dacapo.harness.TestHarness.runBenchmark(TestHarness.java:218)
+	at org.dacapo.harness.TestHarness.main(TestHarness.java:171)
+	at Harness.main(Harness.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: Out of memory.; SQL statement:
+
+ALTER TABLE STOCK ADD CONSTRAINT
+    S_I_FK FOREIGN KEY (S_I_ID) REFERENCES ITEM [90108-123]
+	at org.h2.message.Message.getSQLException(Message.java:111)
+	at org.h2.message.Message.convertThrowable(Message.java:303)
+	at org.h2.command.Command.executeUpdate(Command.java:231)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:162)
+	at org.h2.tools.RunScript.process(RunScript.java:166)
+	at org.h2.tools.RunScript.execute(RunScript.java:154)
+	at org.dacapo.h2.TPCC.runScript(TPCC.java:566)
+	at org.dacapo.h2.TPCC.runScript(TPCC.java:556)
+	at org.dacapo.h2.TPCC.runScript(TPCC.java:544)
+	at org.dacapo.h2.TPCC.createConstraints(TPCC.java:382)
+	at org.dacapo.h2.TPCC.preIterationMemoryDB(TPCC.java:225)
+	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)
+	... 9 more
+Caused by: java.lang.OutOfMemoryError: GC overhead limit exceeded
+	at org.h2.index.TreeIndex.add(TreeIndex.java:40)
+	at org.h2.index.MultiVersionIndex.add(MultiVersionIndex.java:50)
+	at org.h2.table.TableData.addRowsToIndex(TableData.java:337)
+	at org.h2.table.TableData.addIndex(TableData.java:245)
+	at org.h2.command.ddl.AlterTableAddConstraint.createIndex(AlterTableAddConstraint.java:275)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:203)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:89)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:72)
+	at org.h2.command.Command.executeUpdate(Command.java:209)
+	... 18 more
+
+ Time taken for executing : 170823 command :---
+ java -Xms200M -Xmx200M -jar dacapo.jar h2
+-----------------END----------------- 
+
+
+
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
+java.lang.reflect.InvocationTargetException
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.dacapo.harness.H2.preIteration(H2.java:77)
+	at org.dacapo.harness.Benchmark.run(Benchmark.java:152)
+	at org.dacapo.harness.TestHarness.runBenchmark(TestHarness.java:218)
+	at org.dacapo.harness.TestHarness.main(TestHarness.java:171)
+	at Harness.main(Harness.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: Out of memory.; SQL statement:
+
+ALTER TABLE STOCK ADD CONSTRAINT
+    S_I_FK FOREIGN KEY (S_I_ID) REFERENCES ITEM [90108-123]
+	at org.h2.message.Message.getSQLException(Message.java:111)
+	at org.h2.message.Message.convertThrowable(Message.java:303)
+	at org.h2.command.Command.executeUpdate(Command.java:231)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:162)
+	at org.h2.tools.RunScript.process(RunScript.java:166)
+	at org.h2.tools.RunScript.execute(RunScript.java:154)
+	at org.dacapo.h2.TPCC.runScript(TPCC.java:566)
+	at org.dacapo.h2.TPCC.runScript(TPCC.java:556)
+	at org.dacapo.h2.TPCC.runScript(TPCC.java:544)
+	at org.dacapo.h2.TPCC.createConstraints(TPCC.java:382)
+	at org.dacapo.h2.TPCC.preIterationMemoryDB(TPCC.java:225)
+	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)
+	... 9 more
+Caused by: java.lang.OutOfMemoryError: GC overhead limit exceeded
+	at org.h2.index.TreeIndex.find(TreeIndex.java:293)
+	at org.h2.index.MultiVersionIndex.removeIfExists(MultiVersionIndex.java:132)
+	at org.h2.index.MultiVersionIndex.add(MultiVersionIndex.java:51)
+	at org.h2.table.TableData.addRowsToIndex(TableData.java:337)
+	at org.h2.table.TableData.addIndex(TableData.java:245)
+	at org.h2.command.ddl.AlterTableAddConstraint.createIndex(AlterTableAddConstraint.java:275)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:203)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:89)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:72)
+	at org.h2.command.Command.executeUpdate(Command.java:209)
+	... 18 more
+
+ Time taken for executing : 178472 command :---
+ java -Xms200M -Xmx200M -jar dacapo_original.jar h2Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
+java.lang.reflect.InvocationTargetException
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.dacapo.harness.H2.preIteration(H2.java:77)
+	at org.dacapo.harness.Benchmark.run(Benchmark.java:152)
+	at org.dacapo.harness.TestHarness.runBenchmark(TestHarness.java:218)
+	at org.dacapo.harness.TestHarness.main(TestHarness.java:171)
+	at Harness.main(Harness.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: Out of memory.; SQL statement:
+
+ALTER TABLE STOCK ADD CONSTRAINT
+    S_I_FK FOREIGN KEY (S_I_ID) REFERENCES ITEM [90108-123]
+	at org.h2.message.Message.getSQLException(Message.java:111)
+	at org.h2.message.Message.convertThrowable(Message.java:303)
+	at org.h2.command.Command.executeUpdate(Command.java:231)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:162)
+	at org.h2.tools.RunScript.process(RunScript.java:166)
+	at org.h2.tools.RunScript.execute(RunScript.java:154)
+	at org.dacapo.h2.TPCC.runScript(TPCC.java:566)
+	at org.dacapo.h2.TPCC.runScript(TPCC.java:556)
+	at org.dacapo.h2.TPCC.runScript(TPCC.java:544)
+	at org.dacapo.h2.TPCC.createConstraints(TPCC.java:382)
+	at org.dacapo.h2.TPCC.preIterationMemoryDB(TPCC.java:225)
+	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)
+	... 9 more
+Caused by: java.lang.OutOfMemoryError: GC overhead limit exceeded
+	at org.h2.index.TreeIndex.add(TreeIndex.java:40)
+	at org.h2.index.MultiVersionIndex.add(MultiVersionIndex.java:50)
+	at org.h2.table.TableData.addRowsToIndex(TableData.java:337)
+	at org.h2.table.TableData.addIndex(TableData.java:245)
+	at org.h2.command.ddl.AlterTableAddConstraint.createIndex(AlterTableAddConstraint.java:275)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:203)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:89)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:72)
+	at org.h2.command.Command.executeUpdate(Command.java:209)
+	... 18 more
+
+ Time taken for executing : 167458 command :---
+ java -Xms200M -Xmx200M -jar dacapo_original.jar h2
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+
+ Time taken for executing : 32788 command :---
+ java -Xms100M -Xmx100M -jar dacapo.jar h2
+ Time taken for executing : 32204 command :---
+ java -Xms100M -Xmx100M -jar dacapo.jar h2
+-----------------END----------------- 
+
+
+
+
+ Time taken for executing : 32709 command :---
+ java -Xms100M -Xmx100M -jar dacapo_original.jar h2
+ Time taken for executing : 29206 command :---
+ java -Xms100M -Xmx100M -jar dacapo_original.jar h2
 -----------------END----------------- 
 
 
@@ -160,8 +230,7 @@ INSERT INTO ORDERLINE (OL_O_ID, OL_D_ID, OL_W_ID, OL_NUMBER, OL_I_ID, OL_SUPPLY_
 	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)
 	... 9 more
 Caused by: java.lang.OutOfMemoryError: GC overhead limit exceeded
-	at org.h2.value.ValueShort.get(ValueShort.java:132)
-	at org.h2.value.Value.convertTo(Value.java:541)
+	at org.h2.value.Value.convertTo(Value.java:745)
 	at org.h2.table.Column.convert(Column.java:148)
 	at org.h2.command.dml.Insert.insertRows(Insert.java:108)
 	at org.h2.command.dml.Insert.update(Insert.java:82)
@@ -169,8 +238,8 @@ Caused by: java.lang.OutOfMemoryError: GC overhead limit exceeded
 	at org.h2.command.Command.executeUpdate(Command.java:209)
 	... 18 more
 
- Time taken for executing : 7457command :---
-[java, -Xms20M, -Xmx20M, -jar, dacapo.jar, h2]Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
+ Time taken for executing : 33398 command :---
+ java -Xms100M -Xmx100M -jar dacapo.jar h2Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
 java.lang.reflect.InvocationTargetException
 java.lang.reflect.InvocationTargetException
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -198,15 +267,440 @@ INSERT INTO ORDERLINE (OL_O_ID, OL_D_ID, OL_W_ID, OL_NUMBER, OL_I_ID, OL_SUPPLY_
 	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)
 	... 9 more
 Caused by: java.lang.OutOfMemoryError: GC overhead limit exceeded
-	at org.h2.engine.Session.log(Session.java:591)
-	at org.h2.command.dml.Insert.insertRows(Insert.java:120)
+	at java.math.BigInteger.toString(BigInteger.java:2637)
+	at java.math.BigInteger.toString(BigInteger.java:2686)
+	at org.h2.value.ValueDecimal.getPrecision(ValueDecimal.java:138)
+	at org.h2.value.ValueDecimal.checkPrecision(ValueDecimal.java:147)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:313)
+	at org.h2.table.Table.validateConvertUpdateSequence(Table.java:599)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:116)
 	at org.h2.command.dml.Insert.update(Insert.java:82)
 	at org.h2.command.CommandContainer.update(CommandContainer.java:72)
 	at org.h2.command.Command.executeUpdate(Command.java:209)
 	... 18 more
 
- Time taken for executing : 7285command :---
-[java, -Xms20M, -Xmx20M, -jar, dacapo.jar, h2]
+ Time taken for executing : 31912 command :---
+ java -Xms100M -Xmx100M -jar dacapo.jar h2
+-----------------END----------------- 
+
+
+
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
+java.lang.reflect.InvocationTargetException
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.dacapo.harness.H2.preIteration(H2.java:77)
+	at org.dacapo.harness.Benchmark.run(Benchmark.java:152)
+	at org.dacapo.harness.TestHarness.runBenchmark(TestHarness.java:218)
+	at org.dacapo.harness.TestHarness.main(TestHarness.java:171)
+	at Harness.main(Harness.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: Out of memory.; SQL statement:
+INSERT INTO ORDERLINE (OL_O_ID, OL_D_ID, OL_W_ID, OL_NUMBER, OL_I_ID, OL_SUPPLY_W_ID, OL_DELIVERY_D, OL_QUANTITY, OL_AMOUNT, OL_DIST_INFO, OL_DELIVERY_D_INITIAL, OL_INITIAL)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, TRUE) [90108-123]
+	at org.h2.message.Message.getSQLException(Message.java:111)
+	at org.h2.message.Message.convertThrowable(Message.java:303)
+	at org.h2.command.Command.executeUpdate(Command.java:231)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:139)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:128)
+	at org.apache.derbyTesting.system.oe.load.SimpleInsert.orderTable(SimpleInsert.java:437)
+	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateForOneWarehouse(SimpleInsert.java:149)
+	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateAllTables(SimpleInsert.java:127)
+	at org.apache.derbyTesting.system.oe.load.ThreadInsert.populateAllTables(ThreadInsert.java:127)
+	at org.dacapo.h2.TPCC.loadData(TPCC.java:400)
+	at org.dacapo.h2.TPCC.preIterationMemoryDB(TPCC.java:215)
+	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)
+	... 9 more
+Caused by: java.lang.OutOfMemoryError: GC overhead limit exceeded
+	at org.h2.value.ValueStringFixed.get(ValueStringFixed.java:66)
+	at org.h2.value.Value.convertTo(Value.java:761)
+	at org.h2.table.Column.convert(Column.java:148)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:108)
+	at org.h2.command.dml.Insert.update(Insert.java:82)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:72)
+	at org.h2.command.Command.executeUpdate(Command.java:209)
+	... 18 more
+
+ Time taken for executing : 31912 command :---
+ java -Xms100M -Xmx100M -jar dacapo_original.jar h2Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
+java.lang.reflect.InvocationTargetException
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.dacapo.harness.H2.preIteration(H2.java:77)
+	at org.dacapo.harness.Benchmark.run(Benchmark.java:152)
+	at org.dacapo.harness.TestHarness.runBenchmark(TestHarness.java:218)
+	at org.dacapo.harness.TestHarness.main(TestHarness.java:171)
+	at Harness.main(Harness.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: Out of memory.; SQL statement:
+INSERT INTO ORDERLINE (OL_O_ID, OL_D_ID, OL_W_ID, OL_NUMBER, OL_I_ID, OL_SUPPLY_W_ID, OL_DELIVERY_D, OL_QUANTITY, OL_AMOUNT, OL_DIST_INFO, OL_DELIVERY_D_INITIAL, OL_INITIAL)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, TRUE) [90108-123]
+	at org.h2.message.Message.getSQLException(Message.java:111)
+	at org.h2.message.Message.convertThrowable(Message.java:303)
+	at org.h2.table.TableData.addRow(TableData.java:151)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:119)
+	at org.h2.command.dml.Insert.update(Insert.java:82)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:72)
+	at org.h2.command.Command.executeUpdate(Command.java:209)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:139)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:128)
+	at org.apache.derbyTesting.system.oe.load.SimpleInsert.orderTable(SimpleInsert.java:437)
+	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateForOneWarehouse(SimpleInsert.java:149)
+	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateAllTables(SimpleInsert.java:127)
+	at org.apache.derbyTesting.system.oe.load.ThreadInsert.populateAllTables(ThreadInsert.java:127)
+	at org.dacapo.h2.TPCC.loadData(TPCC.java:400)
+	at org.dacapo.h2.TPCC.preIterationMemoryDB(TPCC.java:215)
+	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)
+	... 9 more
+Caused by: java.lang.OutOfMemoryError: GC overhead limit exceeded
+	at java.lang.Integer.valueOf(Integer.java:642)
+	at org.h2.index.ScanIndex.incrementRowCount(ScanIndex.java:164)
+	at org.h2.index.ScanIndex.add(ScanIndex.java:145)
+	at org.h2.table.TableData.addRow(TableData.java:130)
+	... 22 more
+
+ Time taken for executing : 32218 command :---
+ java -Xms100M -Xmx100M -jar dacapo_original.jar h2
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
+....
+Completed 4000 transactions
+	Stock level .............   155 ( 3.9%)
+	Order status by name ....   108 ( 2.7%)
+	Order status by ID ......    65 ( 1.6%)
+	Payment by name .........  1050 (26.2%)
+	Payment by ID ...........   661 (16.5%)
+	Delivery schedule .......   167 ( 4.2%)
+	New order ...............  1774 (44.4%)
+	New order rollback ......    20 ( 0.5%)
+Resetting database to initial state
+===== DaCapo head-runknown h2 starting =====
+===== DaCapo head-runknown h2 PASSED in 15195 msec =====
+
+ Time taken for executing : 42227 command :---
+ java -Xms500M -Xmx500M -jar dacapo.jar h2Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
+....
+Completed 4000 transactions
+	Stock level .............   155 ( 3.9%)
+	Order status by name ....   108 ( 2.7%)
+	Order status by ID ......    65 ( 1.6%)
+	Payment by name .........  1050 (26.2%)
+	Payment by ID ...........   661 (16.5%)
+	Delivery schedule .......   167 ( 4.2%)
+	New order ...............  1774 (44.4%)
+	New order rollback ......    20 ( 0.5%)
+Resetting database to initial state
+===== DaCapo head-runknown h2 starting =====
+===== DaCapo head-runknown h2 PASSED in 14384 msec =====
+
+ Time taken for executing : 41936 command :---
+ java -Xms500M -Xmx500M -jar dacapo.jar h2
+-----------------END----------------- 
+
+
+
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
+....
+Completed 4000 transactions
+	Stock level .............   155 ( 3.9%)
+	Order status by name ....   108 ( 2.7%)
+	Order status by ID ......    65 ( 1.6%)
+	Payment by name .........  1050 (26.2%)
+	Payment by ID ...........   661 (16.5%)
+	Delivery schedule .......   167 ( 4.2%)
+	New order ...............  1774 (44.4%)
+	New order rollback ......    20 ( 0.5%)
+Resetting database to initial state
+===== DaCapo ${build.version} h2 starting =====
+===== DaCapo ${build.version} h2 PASSED in 13915 msec =====
+
+ Time taken for executing : 39056 command :---
+ java -Xms500M -Xmx500M -jar dacapo_original.jar h2Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]
+....
+Completed 4000 transactions
+	Stock level .............   155 ( 3.9%)
+	Order status by name ....   108 ( 2.7%)
+	Order status by ID ......    65 ( 1.6%)
+	Payment by name .........  1050 (26.2%)
+	Payment by ID ...........   661 (16.5%)
+	Delivery schedule .......   167 ( 4.2%)
+	New order ...............  1774 (44.4%)
+	New order rollback ......    20 ( 0.5%)
+Resetting database to initial state
+===== DaCapo ${build.version} h2 starting =====
+===== DaCapo ${build.version} h2 PASSED in 14658 msec =====
+
+ Time taken for executing : 40013 command :---
+ java -Xms500M -Xmx500M -jar dacapo_original.jar h2
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]....Completed 4000 transactions	Stock level .............   155 ( 3.9%)	Order status by name ....   108 ( 2.7%)	Order status by ID ......    65 ( 1.6%)	Payment by name .........  1050 (26.2%)	Payment by ID ...........   661 (16.5%)	Delivery schedule .......   167 ( 4.2%)	New order ...............  1774 (44.4%)	New order rollback ......    20 ( 0.5%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 17152 msec =====
+ Time taken for executing : 46227 command :---
+ java -Xms500M -Xmx500M -jar dacapo.jar h2Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]....Completed 4000 transactions	Stock level .............   155 ( 3.9%)	Order status by name ....   108 ( 2.7%)	Order status by ID ......    65 ( 1.6%)	Payment by name .........  1050 (26.2%)	Payment by ID ...........   661 (16.5%)	Delivery schedule .......   167 ( 4.2%)	New order ...............  1774 (44.4%)	New order rollback ......    20 ( 0.5%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 16608 msec =====
+ Time taken for executing : 49880 command :---
+ java -Xms500M -Xmx500M -jar dacapo.jar h2
+-----------------END----------------- 
+
+
+
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]....Completed 4000 transactions	Stock level .............   155 ( 3.9%)	Order status by name ....   108 ( 2.7%)	Order status by ID ......    65 ( 1.6%)	Payment by name .........  1050 (26.2%)	Payment by ID ...........   661 (16.5%)	Delivery schedule .......   167 ( 4.2%)	New order ...............  1774 (44.4%)	New order rollback ......    20 ( 0.5%)Resetting database to initial state===== DaCapo ${build.version} h2 starting ========== DaCapo ${build.version} h2 PASSED in 13711 msec =====
+ Time taken for executing : 43944 command :---
+ java -Xms500M -Xmx500M -jar dacapo_original.jar h2Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]....Completed 4000 transactions	Stock level .............   155 ( 3.9%)	Order status by name ....   108 ( 2.7%)	Order status by ID ......    65 ( 1.6%)	Payment by name .........  1050 (26.2%)	Payment by ID ...........   661 (16.5%)	Delivery schedule .......   167 ( 4.2%)	New order ...............  1774 (44.4%)	New order rollback ......    20 ( 0.5%)Resetting database to initial state===== DaCapo ${build.version} h2 starting ========== DaCapo ${build.version} h2 PASSED in 13370 msec =====
+ Time taken for executing : 38243 command :---
+ java -Xms500M -Xmx500M -jar dacapo_original.jar h2
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]java.lang.reflect.InvocationTargetExceptionjava.lang.reflect.InvocationTargetException	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)	at java.lang.reflect.Method.invoke(Method.java:606)	at org.dacapo.harness.H2.preIteration(H2.java:77)	at org.dacapo.harness.Benchmark.run(Benchmark.java:152)	at org.dacapo.harness.TestHarness.runBenchmark(TestHarness.java:218)	at org.dacapo.harness.TestHarness.main(TestHarness.java:171)	at Harness.main(Harness.java:17)Caused by: org.h2.jdbc.JdbcSQLException: Out of memory.; SQL statement:INSERT INTO ORDERLINE (OL_O_ID, OL_D_ID, OL_W_ID, OL_NUMBER, OL_I_ID, OL_SUPPLY_W_ID, OL_DELIVERY_D, OL_QUANTITY, OL_AMOUNT, OL_DIST_INFO, OL_DELIVERY_D_INITIAL, OL_INITIAL)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, TRUE) [90108-123]	at org.h2.message.Message.getSQLException(Message.java:111)	at org.h2.message.Message.convertThrowable(Message.java:303)	at org.h2.command.Command.executeUpdate(Command.java:231)	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:139)	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:128)	at org.apache.derbyTesting.system.oe.load.SimpleInsert.orderTable(SimpleInsert.java:437)	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateForOneWarehouse(SimpleInsert.java:149)	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateAllTables(SimpleInsert.java:127)	at org.apache.derbyTesting.system.oe.load.ThreadInsert.populateAllTables(ThreadInsert.java:127)	at org.dacapo.h2.TPCC.loadData(TPCC.java:400)	at org.dacapo.h2.TPCC.preIterationMemoryDB(TPCC.java:215)	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)	... 9 moreCaused by: java.lang.OutOfMemoryError: GC overhead limit exceeded	at org.h2.value.ValueShort.get(ValueShort.java:132)	at org.h2.value.Value.convertTo(Value.java:541)	at org.h2.table.Column.convert(Column.java:148)	at org.h2.command.dml.Insert.insertRows(Insert.java:108)	at org.h2.command.dml.Insert.update(Insert.java:82)	at org.h2.command.CommandContainer.update(CommandContainer.java:72)	at org.h2.command.Command.executeUpdate(Command.java:209)	... 18 more
+ Time taken for executing : 32965 command :---
+ java -Xms100M -Xmx100M -jar dacapo.jar h2Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]java.lang.reflect.InvocationTargetExceptionjava.lang.reflect.InvocationTargetException	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)	at java.lang.reflect.Method.invoke(Method.java:606)	at org.dacapo.harness.H2.preIteration(H2.java:77)	at org.dacapo.harness.Benchmark.run(Benchmark.java:152)	at org.dacapo.harness.TestHarness.runBenchmark(TestHarness.java:218)	at org.dacapo.harness.TestHarness.main(TestHarness.java:171)	at Harness.main(Harness.java:17)Caused by: org.h2.jdbc.JdbcSQLException: Out of memory.; SQL statement:INSERT INTO ORDERLINE (OL_O_ID, OL_D_ID, OL_W_ID, OL_NUMBER, OL_I_ID, OL_SUPPLY_W_ID, OL_DELIVERY_D, OL_QUANTITY, OL_AMOUNT, OL_DIST_INFO, OL_DELIVERY_D_INITIAL, OL_INITIAL)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, TRUE) [90108-123]	at org.h2.message.Message.getSQLException(Message.java:111)	at org.h2.message.Message.convertThrowable(Message.java:303)	at org.h2.command.Command.executeUpdate(Command.java:231)	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:139)	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:128)	at org.apache.derbyTesting.system.oe.load.SimpleInsert.orderTable(SimpleInsert.java:437)	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateForOneWarehouse(SimpleInsert.java:149)	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateAllTables(SimpleInsert.java:127)	at org.apache.derbyTesting.system.oe.load.ThreadInsert.populateAllTables(ThreadInsert.java:127)	at org.dacapo.h2.TPCC.loadData(TPCC.java:400)	at org.dacapo.h2.TPCC.preIterationMemoryDB(TPCC.java:215)	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)	... 9 moreCaused by: java.lang.OutOfMemoryError: GC overhead limit exceeded	at java.math.BigInteger.toString(BigInteger.java:2628)	at java.math.BigInteger.toString(BigInteger.java:2686)	at org.h2.value.ValueDecimal.getPrecision(ValueDecimal.java:138)	at org.h2.value.ValueDecimal.checkPrecision(ValueDecimal.java:147)	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:313)	at org.h2.table.Table.validateConvertUpdateSequence(Table.java:599)	at org.h2.command.dml.Insert.insertRows(Insert.java:116)	at org.h2.command.dml.Insert.update(Insert.java:82)	at org.h2.command.CommandContainer.update(CommandContainer.java:72)	at org.h2.command.Command.executeUpdate(Command.java:209)	... 18 more
+ Time taken for executing : 34019 command :---
+ java -Xms100M -Xmx100M -jar dacapo.jar h2
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]java.lang.reflect.InvocationTargetExceptionjava.lang.reflect.InvocationTargetException	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)	at java.lang.reflect.Method.invoke(Method.java:606)	at org.dacapo.harness.H2.preIteration(H2.java:77)	at org.dacapo.harness.Benchmark.run(Benchmark.java:152)	at org.dacapo.harness.TestHarness.runBenchmark(TestHarness.java:218)	at org.dacapo.harness.TestHarness.main(TestHarness.java:171)	at Harness.main(Harness.java:17)Caused by: org.h2.jdbc.JdbcSQLException: Out of memory.; SQL statement:INSERT INTO ORDERLINE (OL_O_ID, OL_D_ID, OL_W_ID, OL_NUMBER, OL_I_ID, OL_SUPPLY_W_ID, OL_DELIVERY_D, OL_QUANTITY, OL_AMOUNT, OL_DIST_INFO, OL_DELIVERY_D_INITIAL, OL_INITIAL)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, TRUE) [90108-123]	at org.h2.message.Message.getSQLException(Message.java:111)	at org.h2.message.Message.convertThrowable(Message.java:303)	at org.h2.command.Command.executeUpdate(Command.java:231)	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:139)	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:128)	at org.apache.derbyTesting.system.oe.load.SimpleInsert.orderTable(SimpleInsert.java:437)	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateForOneWarehouse(SimpleInsert.java:149)	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateAllTables(SimpleInsert.java:127)	at org.apache.derbyTesting.system.oe.load.ThreadInsert.populateAllTables(ThreadInsert.java:127)	at org.dacapo.h2.TPCC.loadData(TPCC.java:400)	at org.dacapo.h2.TPCC.preIterationMemoryDB(TPCC.java:215)	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)	... 9 moreCaused by: java.lang.OutOfMemoryError: GC overhead limit exceeded	at java.math.BigInteger.toString(BigInteger.java:2648)	at java.math.BigInteger.toString(BigInteger.java:2686)	at org.h2.value.ValueDecimal.getPrecision(ValueDecimal.java:138)	at org.h2.value.ValueDecimal.checkPrecision(ValueDecimal.java:147)	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:313)	at org.h2.table.Table.validateConvertUpdateSequence(Table.java:599)	at org.h2.command.dml.Insert.insertRows(Insert.java:116)	at org.h2.command.dml.Insert.update(Insert.java:82)	at org.h2.command.CommandContainer.update(CommandContainer.java:72)	at org.h2.command.Command.executeUpdate(Command.java:209)	... 18 more
+ Time taken for executing : 33753 command :---
+ java -Xms100M -Xmx100M -jar dacapo.jar h2Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]java.lang.reflect.InvocationTargetExceptionjava.lang.reflect.InvocationTargetException	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)	at java.lang.reflect.Method.invoke(Method.java:606)	at org.dacapo.harness.H2.preIteration(H2.java:77)	at org.dacapo.harness.Benchmark.run(Benchmark.java:152)	at org.dacapo.harness.TestHarness.runBenchmark(TestHarness.java:218)	at org.dacapo.harness.TestHarness.main(TestHarness.java:171)	at Harness.main(Harness.java:17)Caused by: org.h2.jdbc.JdbcSQLException: Out of memory.; SQL statement:INSERT INTO ORDERLINE (OL_O_ID, OL_D_ID, OL_W_ID, OL_NUMBER, OL_I_ID, OL_SUPPLY_W_ID, OL_DELIVERY_D, OL_QUANTITY, OL_AMOUNT, OL_DIST_INFO, OL_DELIVERY_D_INITIAL, OL_INITIAL)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, TRUE) [90108-123]	at org.h2.message.Message.getSQLException(Message.java:111)	at org.h2.message.Message.convertThrowable(Message.java:303)	at org.h2.command.Command.executeUpdate(Command.java:231)	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:139)	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:128)	at org.apache.derbyTesting.system.oe.load.SimpleInsert.orderTable(SimpleInsert.java:437)	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateForOneWarehouse(SimpleInsert.java:149)	at org.apache.derbyTesting.system.oe.load.SimpleInsert.populateAllTables(SimpleInsert.java:127)	at org.apache.derbyTesting.system.oe.load.ThreadInsert.populateAllTables(ThreadInsert.java:127)	at org.dacapo.h2.TPCC.loadData(TPCC.java:400)	at org.dacapo.h2.TPCC.preIterationMemoryDB(TPCC.java:215)	at org.dacapo.h2.TPCC.preIteration(TPCC.java:254)	... 9 moreCaused by: java.lang.OutOfMemoryError: GC overhead limit exceeded	at java.math.BigInteger.valueOf(BigInteger.java:957)	at java.math.BigDecimal.inflate(BigDecimal.java:3519)	at java.math.BigDecimal.unscaledValue(BigDecimal.java:2205)	at org.h2.value.ValueDecimal.getPrecision(ValueDecimal.java:138)	at org.h2.value.ValueDecimal.checkPrecision(ValueDecimal.java:147)	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:313)	at org.h2.table.Table.validateConvertUpdateSequence(Table.java:599)	at org.h2.command.dml.Insert.insertRows(Insert.java:116)	at org.h2.command.dml.Insert.update(Insert.java:82)	at org.h2.command.CommandContainer.update(CommandContainer.java:72)	at org.h2.command.Command.executeUpdate(Command.java:209)	... 18 more
+ Time taken for executing : 33880 command :---
+ java -Xms100M -Xmx100M -jar dacapo.jar h2
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+Invalid initial heap size: -Xms10200MThe specified size exceeds the maximum representable size.Error: Could not create the Java Virtual Machine.Error: A fatal exception has occurred. Program will exit.
+ Time taken for executing : 27 command :---
+ java -Xms10200M -Xmx200M -jar dacapo.jar h2Invalid initial heap size: -Xms10200MThe specified size exceeds the maximum representable size.Error: Could not create the Java Virtual Machine.Error: A fatal exception has occurred. Program will exit.
+ Time taken for executing : 13 command :---
+ java -Xms10200M -Xmx200M -jar dacapo.jar h2
+-----------------END----------------- 
+
+
+
+Invalid initial heap size: -Xms10200MThe specified size exceeds the maximum representable size.Error: Could not create the Java Virtual Machine.Error: A fatal exception has occurred. Program will exit.
+ Time taken for executing : 14 command :---
+ java -Xms10200M -Xmx200M -jar dacapo_original.jar h2Invalid initial heap size: -Xms10200MThe specified size exceeds the maximum representable size.Error: Could not create the Java Virtual Machine.Error: A fatal exception has occurred. Program will exit.
+ Time taken for executing : 14 command :---
+ java -Xms10200M -Xmx200M -jar dacapo_original.jar h2
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+******************************************
+-----------------START-----------------
+Invalid initial heap size: -Xms201000MThe specified size exceeds the maximum representable size.Error: Could not create the Java Virtual Machine.Error: A fatal exception has occurred. Program will exit.
+ Time taken for executing : 54 command :---
+ java -Xms201000M -Xmx1000M -jar dacapo.jar h2Invalid initial heap size: -Xms201000MThe specified size exceeds the maximum representable size.Error: Could not create the Java Virtual Machine.Error: A fatal exception has occurred. Program will exit.
+ Time taken for executing : 34 command :---
+ java -Xms201000M -Xmx1000M -jar dacapo.jar h2
+-----------------END----------------- 
+
+
+
+Invalid initial heap size: -Xms201000MThe specified size exceeds the maximum representable size.Error: Could not create the Java Virtual Machine.Error: A fatal exception has occurred. Program will exit.
+ Time taken for executing : 43 command :---
+ java -Xms201000M -Xmx1000M -jar dacapo_original.jar h2Invalid initial heap size: -Xms201000MThe specified size exceeds the maximum representable size.Error: Could not create the Java Virtual Machine.Error: A fatal exception has occurred. Program will exit.
+ Time taken for executing : 37 command :---
+ java -Xms201000M -Xmx1000M -jar dacapo_original.jar h2
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]....Completed 4000 transactions	Stock level .............   155 ( 3.9%)	Order status by name ....   108 ( 2.7%)	Order status by ID ......    65 ( 1.6%)	Payment by name .........  1050 (26.2%)	Payment by ID ...........   661 (16.5%)	Delivery schedule .......   167 ( 4.2%)	New order ...............  1774 (44.4%)	New order rollback ......    20 ( 0.5%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 24519 msec =====
+ Time taken for executing : 78859 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo.jar h2Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]....Completed 4000 transactions	Stock level .............   155 ( 3.9%)	Order status by name ....   108 ( 2.7%)	Order status by ID ......    65 ( 1.6%)	Payment by name .........  1050 (26.2%)	Payment by ID ...........   661 (16.5%)	Delivery schedule .......   167 ( 4.2%)	New order ...............  1774 (44.4%)	New order rollback ......    20 ( 0.5%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 15443 msec =====
+ Time taken for executing : 48227 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo.jar h2
+-----------------END----------------- 
+
+
+
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]....Completed 4000 transactions	Stock level .............   155 ( 3.9%)	Order status by name ....   108 ( 2.7%)	Order status by ID ......    65 ( 1.6%)	Payment by name .........  1050 (26.2%)	Payment by ID ...........   661 (16.5%)	Delivery schedule .......   167 ( 4.2%)	New order ...............  1774 (44.4%)	New order rollback ......    20 ( 0.5%)Resetting database to initial state===== DaCapo ${build.version} h2 starting ========== DaCapo ${build.version} h2 PASSED in 14741 msec =====
+ Time taken for executing : 41344 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo_original.jar h2Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,4000]....Completed 4000 transactions	Stock level .............   155 ( 3.9%)	Order status by name ....   108 ( 2.7%)	Order status by ID ......    65 ( 1.6%)	Payment by name .........  1050 (26.2%)	Payment by ID ...........   661 (16.5%)	Delivery schedule .......   167 ( 4.2%)	New order ...............  1774 (44.4%)	New order rollback ......    20 ( 0.5%)Resetting database to initial state===== DaCapo ${build.version} h2 starting ========== DaCapo ${build.version} h2 PASSED in 15090 msec =====
+ Time taken for executing : 42939 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo_original.jar h2
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,64000]................................Completed 32000 transactions	Stock level .............  1277 ( 4.0%)	Order status by name ....   765 ( 2.4%)	Order status by ID ......   518 ( 1.6%)	Payment by name .........  8262 (25.8%)	Payment by ID ...........  5489 (17.2%)	Delivery schedule .......  1299 ( 4.1%)	New order ............... 14241 (44.5%)	New order rollback ......   149 ( 0.5%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 55614 msec =====
+ Time taken for executing : 77276 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo.jar h2 -s largeUsing scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,64000]................................Completed 32000 transactions	Stock level .............  1277 ( 4.0%)	Order status by name ....   765 ( 2.4%)	Order status by ID ......   518 ( 1.6%)	Payment by name .........  8262 (25.8%)	Payment by ID ...........  5489 (17.2%)	Delivery schedule .......  1299 ( 4.1%)	New order ............... 14241 (44.5%)	New order rollback ......   149 ( 0.5%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 55079 msec =====
+ Time taken for executing : 76849 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo.jar h2 -s large
+-----------------END----------------- 
+
+
+
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,64000]................................Completed 32000 transactions	Stock level .............  1277 ( 4.0%)	Order status by name ....   765 ( 2.4%)	Order status by ID ......   518 ( 1.6%)	Payment by name .........  8262 (25.8%)	Payment by ID ...........  5489 (17.2%)	Delivery schedule .......  1299 ( 4.1%)	New order ............... 14241 (44.5%)	New order rollback ......   149 ( 0.5%)Resetting database to initial state===== DaCapo ${build.version} h2 starting ========== DaCapo ${build.version} h2 PASSED in 54218 msec =====
+ Time taken for executing : 74833 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo_original.jar h2 -s largeUsing scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,64000]................................Completed 32000 transactions	Stock level .............  1277 ( 4.0%)	Order status by name ....   765 ( 2.4%)	Order status by ID ......   518 ( 1.6%)	Payment by name .........  8262 (25.8%)	Payment by ID ...........  5489 (17.2%)	Delivery schedule .......  1299 ( 4.1%)	New order ............... 14241 (44.5%)	New order rollback ......   149 ( 0.5%)Resetting database to initial state===== DaCapo ${build.version} h2 starting ========== DaCapo ${build.version} h2 PASSED in 52897 msec =====
+ Time taken for executing : 73512 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo_original.jar h2 -s large
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,64000]................................Completed 32000 transactions	Stock level .............  1277 ( 4.0%)	Order status by name ....   765 ( 2.4%)	Order status by ID ......   518 ( 1.6%)	Payment by name .........  8262 (25.8%)	Payment by ID ...........  5489 (17.2%)	Delivery schedule .......  1299 ( 4.1%)	New order ............... 14241 (44.5%)	New order rollback ......   149 ( 0.5%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 54975 msec =====******************************************
+-----------------START-----------------
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]Completed 400 transactions	Stock level .............    12 ( 3.0%)	Order status by name ....    11 ( 2.8%)	Order status by ID ......     5 ( 1.3%)	Payment by name .........   107 (26.8%)	Payment by ID ...........    64 (16.0%)	Delivery schedule .......    18 ( 4.5%)	New order ...............   179 (44.8%)	New order rollback ......     4 ( 1.0%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 2729 msec =====
+ Time taken for executing : 11510 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo.jar h2 -s smallUsing scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]Completed 400 transactions	Stock level .............    12 ( 3.0%)	Order status by name ....    11 ( 2.8%)	Order status by ID ......     5 ( 1.3%)	Payment by name .........   107 (26.8%)	Payment by ID ...........    64 (16.0%)	Delivery schedule .......    18 ( 4.5%)	New order ...............   179 (44.8%)	New order rollback ......     4 ( 1.0%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 3836 msec =====
+ Time taken for executing : 12668 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo.jar h2 -s small
+-----------------END----------------- 
+
+
+
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]Completed 400 transactions	Stock level .............    12 ( 3.0%)	Order status by name ....    11 ( 2.8%)	Order status by ID ......     5 ( 1.3%)	Payment by name .........   107 (26.8%)	Payment by ID ...........    64 (16.0%)	Delivery schedule .......    18 ( 4.5%)	New order ...............   179 (44.8%)	New order rollback ......     4 ( 1.0%)Resetting database to initial state===== DaCapo ${build.version} h2 starting ========== DaCapo ${build.version} h2 PASSED in 3069 msec =====
+ Time taken for executing : 12179 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo_original.jar h2 -s smallUsing scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]Completed 400 transactions	Stock level .............    12 ( 3.0%)	Order status by name ....    11 ( 2.8%)	Order status by ID ......     5 ( 1.3%)	Payment by name .........   107 (26.8%)	Payment by ID ...........    64 (16.0%)	Delivery schedule .......    18 ( 4.5%)	New order ...............   179 (44.8%)	New order rollback ......     4 ( 1.0%)Resetting database to initial state===== DaCapo ${build.version} h2 starting ========== DaCapo ${build.version} h2 PASSED in 2641 msec =====
+ Time taken for executing : 11922 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo_original.jar h2 -s small
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]Completed 400 transactions	Stock level .............    12 ( 3.0%)	Order status by name ....    11 ( 2.8%)	Order status by ID ......     5 ( 1.3%)	Payment by name .........   107 (26.8%)	Payment by ID ...........    64 (16.0%)	Delivery schedule .......    18 ( 4.5%)	New order ...............   179 (44.8%)	New order rollback ......     4 ( 1.0%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 3680 msec =====
+ Time taken for executing : 13330 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo.jar h2 -s smallUsing scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]Completed 400 transactions	Stock level .............    12 ( 3.0%)	Order status by name ....    11 ( 2.8%)	Order status by ID ......     5 ( 1.3%)	Payment by name .........   107 (26.8%)	Payment by ID ...........    64 (16.0%)	Delivery schedule .......    18 ( 4.5%)	New order ...............   179 (44.8%)	New order rollback ......     4 ( 1.0%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 4530 msec =====
+ Time taken for executing : 16638 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo.jar h2 -s small
+-----------------END----------------- 
+
+
+
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]Completed 400 transactions	Stock level .............    12 ( 3.0%)	Order status by name ....    11 ( 2.8%)	Order status by ID ......     5 ( 1.3%)	Payment by name .........   107 (26.8%)	Payment by ID ...........    64 (16.0%)	Delivery schedule .......    18 ( 4.5%)	New order ...............   179 (44.8%)	New order rollback ......     4 ( 1.0%)Resetting database to initial state===== DaCapo ${build.version} h2 starting ========== DaCapo ${build.version} h2 PASSED in 3668 msec =====
+ Time taken for executing : 14584 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo_original.jar h2 -s smallUsing scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]Completed 400 transactions	Stock level .............    12 ( 3.0%)	Order status by name ....    11 ( 2.8%)	Order status by ID ......     5 ( 1.3%)	Payment by name .........   107 (26.8%)	Payment by ID ...........    64 (16.0%)	Delivery schedule .......    18 ( 4.5%)	New order ...............   179 (44.8%)	New order rollback ......     4 ( 1.0%)Resetting database to initial state===== DaCapo ${build.version} h2 starting ========== DaCapo ${build.version} h2 PASSED in 5321 msec =====
+ Time taken for executing : 16537 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo_original.jar h2 -s small
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]Completed 400 transactions	Stock level .............    12 ( 3.0%)	Order status by name ....    11 ( 2.8%)	Order status by ID ......     5 ( 1.3%)	Payment by name .........   107 (26.8%)	Payment by ID ...........    64 (16.0%)	Delivery schedule .......    18 ( 4.5%)	New order ...............   179 (44.8%)	New order rollback ......     4 ( 1.0%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 4415 msec =====
+ Time taken for executing : 16215 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo.jar h2 -s smallUsing scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]Completed 400 transactions	Stock level .............    12 ( 3.0%)	Order status by name ....    11 ( 2.8%)	Order status by ID ......     5 ( 1.3%)	Payment by name .........   107 (26.8%)	Payment by ID ...........    64 (16.0%)	Delivery schedule .......    18 ( 4.5%)	New order ...............   179 (44.8%)	New order rollback ......     4 ( 1.0%)Resetting database to initial state===== DaCapo head-runknown h2 starting ========== DaCapo head-runknown h2 PASSED in 3680 msec =====
+ Time taken for executing : 15491 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo.jar h2 -s small
+-----------------END----------------- 
+
+
+
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]Completed 400 transactions	Stock level .............    12 ( 3.0%)	Order status by name ....    11 ( 2.8%)	Order status by ID ......     5 ( 1.3%)	Payment by name .........   107 (26.8%)	Payment by ID ...........    64 (16.0%)	Delivery schedule .......    18 ( 4.5%)	New order ...............   179 (44.8%)	New order rollback ......     4 ( 1.0%)Resetting database to initial state===== DaCapo ${build.version} h2 starting ========== DaCapo ${build.version} h2 PASSED in 3639 msec =====
+ Time taken for executing : 14532 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo_original.jar h2 -s smallUsing scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]Completed 400 transactions	Stock level .............    12 ( 3.0%)	Order status by name ....    11 ( 2.8%)	Order status by ID ......     5 ( 1.3%)	Payment by name .........   107 (26.8%)	Payment by ID ...........    64 (16.0%)	Delivery schedule .......    18 ( 4.5%)	New order ...............   179 (44.8%)	New order rollback ......     4 ( 1.0%)Resetting database to initial state===== DaCapo ${build.version} h2 starting ========== DaCapo ${build.version} h2 PASSED in 4495 msec =====
+ Time taken for executing : 15211 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo_original.jar h2 -s small
+-----------------END----------------- 
+
+
+
+******************************************
+-----------------START-----------------
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]
+
+Completed 400 transactions
+	Stock level .............    12 ( 3.0%)
+	Order status by name ....    11 ( 2.8%)
+	Order status by ID ......     5 ( 1.3%)
+	Payment by name .........   107 (26.8%)
+	Payment by ID ...........    64 (16.0%)
+	Delivery schedule .......    18 ( 4.5%)
+	New order ...............   179 (44.8%)
+	New order rollback ......     4 ( 1.0%)
+Resetting database to initial state
+===== DaCapo head-runknown h2 starting =====
+===== DaCapo head-runknown h2 PASSED in 3916 msec =====
+
+ Time taken for executing : 16496 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo.jar h2 -s smallUsing scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]
+
+Completed 400 transactions
+	Stock level .............    12 ( 3.0%)
+	Order status by name ....    11 ( 2.8%)
+	Order status by ID ......     5 ( 1.3%)
+	Payment by name .........   107 (26.8%)
+	Payment by ID ...........    64 (16.0%)
+	Delivery schedule .......    18 ( 4.5%)
+	New order ...............   179 (44.8%)
+	New order rollback ......     4 ( 1.0%)
+Resetting database to initial state
+===== DaCapo head-runknown h2 starting =====
+===== DaCapo head-runknown h2 PASSED in 3302 msec =====
+
+ Time taken for executing : 15875 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo.jar h2 -s small
+-----------------END----------------- 
+
+
+
+Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]
+
+Completed 400 transactions
+	Stock level .............    12 ( 3.0%)
+	Order status by name ....    11 ( 2.8%)
+	Order status by ID ......     5 ( 1.3%)
+	Payment by name .........   107 (26.8%)
+	Payment by ID ...........    64 (16.0%)
+	Delivery schedule .......    18 ( 4.5%)
+	New order ...............   179 (44.8%)
+	New order rollback ......     4 ( 1.0%)
+Resetting database to initial state
+===== DaCapo ${build.version} h2 starting =====
+===== DaCapo ${build.version} h2 PASSED in 4302 msec =====
+
+ Time taken for executing : 16014 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo_original.jar h2 -s smallUsing scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,400]
+
+Completed 400 transactions
+	Stock level .............    12 ( 3.0%)
+	Order status by name ....    11 ( 2.8%)
+	Order status by ID ......     5 ( 1.3%)
+	Payment by name .........   107 (26.8%)
+	Payment by ID ...........    64 (16.0%)
+	Delivery schedule .......    18 ( 4.5%)
+	New order ...............   179 (44.8%)
+	New order rollback ......     4 ( 1.0%)
+Resetting database to initial state
+===== DaCapo ${build.version} h2 starting =====
+===== DaCapo ${build.version} h2 PASSED in 3402 msec =====
+
+ Time taken for executing : 15132 command :---
+ java -Xms1000M -Xmx1000M -jar dacapo_original.jar h2 -s small
 -----------------END----------------- 
 
 
